@@ -15,11 +15,13 @@
 			<ul>
 				{% for film in films %}
 					<li>{{film.Title}}</li>
-					<input type="submit">Supprimer</input>
-			{% endfor %}
-		</ul>
+					<a href="{{path('updateF', {'id':film.id} )}} ">Editer</a>
+					<a href="{{path('deleteF', {'id':film.id} )}} ">Supprimer</a>
+				{% endfor %}
+			</ul>
 
-	{% endif %}
+		{% endif %}
 
 
-</div>{% endblock %}
+	</div>
+{% endblock %}

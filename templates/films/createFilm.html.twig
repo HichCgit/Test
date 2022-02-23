@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form Film
+{% endblock %}
+
+{% block body %}
+
+	{% if (isEditor)%}
+		<h1>Formulaire Edition film</h1>
+	{% else %}
+		<h1>Formulaire Ajout Film</h1>
+	{% endif %}
+
+	<div class="formF">
+
+		{{ form_start(form)}}
+
+		{{form_row(form.Title ,  {'label':'Title :'}) }}
+		{{form_row(form.Synopsis, {'label':'Synopsis :'} )}}
+		{{form_row(form.Genre, {'label':'Genre :'} )}}
+		{{form_row(form.Realisateur , {'label':'Realisateur  :'})}}
+		{{	form_row(form.Duree , {'label':'Synopsis :'})}}
+
+
+		{% if (isEditor)%}
+			{{form_row(form.save , {'label':'Edit'})}}
+		{% else %}
+			{{form_row(form.save , {'label':'Save'})}}
+		{% endif %}
+
+		{{form_end(form)}}
+	</div>
+
+
+{% endblock %}
