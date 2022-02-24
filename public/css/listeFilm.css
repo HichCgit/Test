@@ -1,0 +1,36 @@
+
+.cardFilms{
+    display: flex;
+    background-color:rgb(146, 238, 181);
+    align-items: center;
+    justify-content: center;
+   
+    font-family: fantasy;
+    font-size: medium;  
+    
+}
+
+.cardFilm{
+    
+    margin: auto;
+    border: solid black 1px;
+    margin-bottom: 10px;
+    width: 50%;
+    height: 60px;
+    
+}
+
+.cardF{
+    
+    margin: auto;
+    border: solid black 1px;
+    margin-bottom: 10px;
+    width: 50%;
+    height: 60px;
+    
+}
+.ListeFilm{
+
+
+
+}

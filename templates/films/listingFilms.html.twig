@@ -1,9 +1,11 @@
 {% extends "base.html.twig" %}
 
+
 {% block title %}Films
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="\css\listeFilm.css">
 	<div>
 
 		<div>Voici la liste des Films disponibles :</div>
@@ -13,11 +15,17 @@
 
 		{% else %}
 			<ul>
-				{% for film in films %}
-					<li>{{film.Title}}</li>
-					<a href="{{path('updateF', {'id':film.id} )}} ">Editer</a>
-					<a href="{{path('deleteF', {'id':film.id} )}} ">Supprimer</a>
-				{% endfor %}
+				<div class="cardFilms">
+					{% for film in films %}
+						<div class="cardFilm">
+							<li class="ListeFilm">
+								<a href="{{path('filmInfo', {'id':film.id})}}">{{film.Title}}</a>
+								<a href="{{path('updateF', {'id':film.id} )}} ">Editer</a>
+								<a href="{{path('deleteF', {'id':film.id} )}} ">Supprimer</a>
+							</li>
+						</div>
+					{% endfor %}
+				</div>
 			</ul>
 
 		{% endif %}

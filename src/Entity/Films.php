@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\FilmsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @ORM\Entity(repositoryClass=FilmsRepository::class)
@@ -19,6 +21,8 @@ class Films
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * message = "Champs non valide"
      */
     private $Title;
 

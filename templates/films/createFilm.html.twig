@@ -16,10 +16,10 @@
 		{{ form_start(form)}}
 
 		{{form_row(form.Title ,  {'label':'Title :'}) }}
-		{{form_row(form.Synopsis, {'label':'Synopsis :'} )}}
-		{{form_row(form.Genre, {'label':'Genre :'} )}}
-		{{form_row(form.Realisateur , {'label':'Realisateur  :'})}}
-		{{	form_row(form.Duree , {'label':'Synopsis :'})}}
+		{{form_row(form.synopsis, {'label':'Synopsis :'} )}}
+		{{form_row(form.genre, {'label':'Genre :'} )}}
+		{{form_row(form.realisateur , {'label':'Realisateur  :'})}}
+		{{	form_row(form.duree , {'label':'Durée :'})}}
 
 
 		{% if (isEditor)%}
@@ -28,6 +28,11 @@
 			{{form_row(form.save , {'label':'Save'})}}
 		{% endif %}
 
+		{% for error in errors %}
+
+			<li>{{error.message}}</li>
+
+		{% endfor %}
 		{{form_end(form)}}
 	</div>
 

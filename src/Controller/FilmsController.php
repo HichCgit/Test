@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Films;
+use App\Form\FilmformType;
 use App\Repository\FilmsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class FilmsController extends AbstractController
 {
@@ -20,10 +23,7 @@ class FilmsController extends AbstractController
     //     $this->FR = $FR;
     // }
 
-    /**
-     * @Route("/ff", name="createFilms")
-     * @Route("/updateF/{id}", name="updateF")
-     */
+
     public function index(Request $request, ManagerRegistry $doctrine, $id = null)
     {
         $entityManager = $doctrine->getManager();
@@ -57,6 +57,7 @@ class FilmsController extends AbstractController
 
         // ------------------ Envoie du Formulaire --------
 
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -86,27 +87,78 @@ class FilmsController extends AbstractController
         //----------Delete----------
 
         if (isset($id)) {
-            $films = $entityManager->getRepository(Films::class)->find($id);
-            $entityManager->remove($films);
+            $film = $entityManager->getRepository(Films::class)->find($id);
+            $entityManager->remove($film);
             $entityManager->flush();
-
-            return $this->redirectToRoute('listingFilms');
         }
+        return $this->redirectToRoute('listingFilms');
     }
 
     /**
      * @Route("/listingFilms", name="listingFilms")
+     * @Route("/filmInfo/{id}" , name="filmInfo")
      */
-    public function listing(ManagerRegistry $doctrine): Response
+    public function listing(ManagerRegistry $doctrine, $id = null): Response
     {
         $films =  $doctrine->getManager()->getRepository(Films::class)->findAll();
 
         if (!isset($films)) {
             return $this->redirectToRoute("accueil");
+        } else {
+
+            return $this->render("films/listingFilms.html.twig", ["films" => $films]);
         }
-        return $this->render("films/listingFilms.html.twig", ["films" => $films]);
+        if (isset($id)) {
+            $film = $doctrine->getManager()->getRepository(Films::class)->find($id);
+            return $this->render("films/filminfo.html.twig", ["film" => $film]);
+            echo "salut0";
+        }
     }
 
+    /**
+     * @Route("/filmInfo/{id}" , name="filmInfo")
+     */
+    public function findOne(ManagerRegistry $doctrine, $id): Response
+    {
+
+        if (isset($id)) {
+            $film = $doctrine->getManager()->getRepository(Films::class)->find($id);
+            return $this->render("films/filminfo.html.twig", ["film" => $film]);
+        }
+    }
+    /**
+     * @Route("/ff", name="createFilms")
+     * @Route("/updateF/{id}", name="updateF")
+     */
+    public function v2edit(Films $film = null, ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator)
+    {
+        $entityManager = $doctrine->getManager();
+
+        if (!$film) {
+            $film = new Films;
+        }
+        $form = $this->createForm(FilmformType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $film = $form->getData();
+
+
+            $entityManager->persist($film);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        $errors = $validator->validate($film);
+
+        return $this->renderForm('films/createFilm.html.twig', [
+            'form' => $form,
+            'isEditor' => $film->getId(),
+            'errors' => $errors
+        ]);
+    }
 
     /**
      * @Route("/AjoutFilm", name="AjoutFilm")

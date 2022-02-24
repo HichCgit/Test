@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{film.Title}}
+{% endblock %}
+
+{% block body %}
+	<link rel="stylesheet" href="\css\listeFilm.css">
+	<div class="cardF">
+
+		<h2>{{film.Title}}</h2>
+		<span>{{film.Synopsis}}</span>
+		<span>{{film.Genre}}</span>
+
+		<span>Realisateur :
+			{{film.Realisateur}}</span>
+		<span>{{film.Duree}}</span>
+
+
+	</div>
+{% endblock %}
