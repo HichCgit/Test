@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form Film
+{% endblock %}
+
+{% block body %}
+
+	{% if (seance)%}
+		<h1>Formulaire Edition Seance</h1>
+	{% else %}
+		<h1>Formulaire Ajout Seance</h1>
+	{% endif %}
+
+	<div class="formF">
+
+		{{ form_start(form)}}
+
+		{{form_row(form.dateDebut ,  {'label':'Date début :'}) }}
+		{{form_row(form.langue, {'label':'Langue :'} )}}
+		{{form_row(form.films,{'label':'Film : '})}}
+		{% if (seance)%}
+			{{form_row(form.save , {'label':'Edit'})}}
+		{% else %}
+			{{form_row(form.save , {'label':'Save'})}}
+		{% endif %}
+
+		{{form_end(form)}}
+	</div>
+
+
+{% endblock %}

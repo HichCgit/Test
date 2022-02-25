@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}Seances
+{% endblock %}
+
+{% block body %}
+	<link rel="stylesheet" href="\css\listeFilm.css">
+	<div>
+
+		<div>Voici la liste des Seances disponibles :</div>
+
+		{% if seances | length == 0 %}
+			pas de séance disponibles
+
+		{% else %}
+			<ul>
+				<div class="cardFilms">
+					{% for seance in seances %}
+						<div class="cardFilm">
+							<li class="ListeFilm">
+								<span>Film :{{seance.films.Title}}</span>
+
+								<div>Date :
+									{{seance.datedebut|date("d/m/Y")}}</div>
+								<div>Horaire :
+									{{seance.datedebut|date("H:i")}}</div>
+								<a href="{{path('updateSeance', {'id':seance.id} )}} ">Editer</a>
+								<a href="{{path('deleteSeance', {'id':seance.id} )}} ">Supprimer</a>
+							</li>
+						</div>
+					{% endfor %}
+				</div>
+			</ul>
+
+		{% endif %}
+
+
+	</div>
+{% endblock %}

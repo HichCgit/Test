@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Films;
+use DateTimeImmutable;
 use App\Form\FilmformType;
 use App\Repository\FilmsRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FilmsController extends AbstractController
 {
@@ -26,55 +28,55 @@ class FilmsController extends AbstractController
 
     public function index(Request $request, ManagerRegistry $doctrine, $id = null)
     {
-        $entityManager = $doctrine->getManager();
-        $isEditor = false;
+        // $entityManager = $doctrine->getManager();
+        // $isEditor = false;
 
 
-        //-----------Editer un film-------
-        if (isset($id)) {
-            $films = $entityManager->getRepository(Films::class)->find($id);
-            if (!isset($films)) {
-                return $this->redirectToRoute('listingFilms');
-            }
-            $isEditor = true;
-        } else {
-            $films = new Films;
-        }
+        // //-----------Editer un film-------
+        // if (isset($id)) {
+        //     $films = $entityManager->getRepository(Films::class)->find($id);
+        //     if (!isset($films)) {
+        //         return $this->redirectToRoute('listingFilms');
+        //     }
+        //     $isEditor = true;
+        // } else {
+        //     $films = new Films;
+        // }
 
 
 
-        //----------CREATION FORMULAIRE----------------------
+        // //----------CREATION FORMULAIRE----------------------
 
 
-        $form = $this->createFormBuilder($films)
-            ->add('Title', TextType::class)
-            ->add('Synopsis', TextType::class)
-            ->add('Genre', TextType::class)
-            ->add('Realisateur', TextType::class)
-            ->add('Duree', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Create Film'])
-            ->getForm();
+        // $form = $this->createFormBuilder($films)
+        //     ->add('Title', TextType::class)
+        //     ->add('Synopsis', TextType::class)
+        //     ->add('Genre', TextType::class)
+        //     ->add('Realisateur', TextType::class)
+        //     ->add('Duree', TextType::class)
+        //     ->add('save', SubmitType::class, ['label' => 'Create Film'])
+        //     ->getForm();
 
-        // ------------------ Envoie du Formulaire --------
-
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $films = $form->getData();
+        // // ------------------ Envoie du Formulaire --------
 
 
-            $entityManager->persist($films);
-            $entityManager->flush();
+        // $form->handleRequest($request);
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+        //     $films = $form->getData();
 
 
-            return $this->redirectToRoute('accueil');
-        }
+        //     $entityManager->persist($films);
+        //     $entityManager->flush();
 
-        return $this->renderForm('films/createFilm.html.twig', [
-            'form' => $form,
-            'isEditor' => $isEditor
-        ]);
+
+        //     return $this->redirectToRoute('accueil');
+        // }
+
+        // return $this->renderForm('films/createFilm.html.twig', [
+        //     'form' => $form,
+        //     'isEditor' => $isEditor
+        // ]);
     }
 
 
@@ -111,7 +113,6 @@ class FilmsController extends AbstractController
         if (isset($id)) {
             $film = $doctrine->getManager()->getRepository(Films::class)->find($id);
             return $this->render("films/filminfo.html.twig", ["film" => $film]);
-            echo "salut0";
         }
     }
 
@@ -137,10 +138,15 @@ class FilmsController extends AbstractController
         if (!$film) {
             $film = new Films;
         }
-        $form = $this->createForm(FilmformType::class);
+        $form = $this->createForm(FilmformType::class, $film);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if (!$film->getId()) {
+                $film->setCreatedAt(new \DateTimeImmutable("now"));
+            }
+            $film->setUpdatedAt(new DateTime("now"));
             $film = $form->getData();
 
 

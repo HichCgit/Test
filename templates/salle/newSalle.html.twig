@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form Salle
+{% endblock %}
+
+{% block body %}
+
+	{% if (salle)%}
+		<h1>Formulaire Edition Salle</h1>
+	{% else %}
+		<h1>Formulaire Ajout Salle</h1>
+	{% endif %}
+
+	<div class="formF">
+
+		{{ form_start(form)}}
+
+		{{form_row(form.Numero ,  {'label':'Numéro de Salle :'}) }}
+		{{form_row(form.status, {'label':'Status :'} )}}
+
+		{% if (salle)%}
+			{{form_row(form.save , {'label':'Edit'})}}
+		{% else %}
+			{{form_row(form.save , {'label':'Save'})}}
+		{% endif %}
+
+		{{form_end(form)}}
+	</div>
+
+
+{% endblock %}
