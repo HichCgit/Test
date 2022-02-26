@@ -57,7 +57,7 @@ class SeanceController extends AbstractController
             $entityManager->flush();
 
 
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('listingSeance');
         }
 
         $errors = $validator->validate($seance);
@@ -78,7 +78,7 @@ class SeanceController extends AbstractController
         $seances =  $doctrine->getManager()->getRepository(Seance::class)->findAll();
 
         if (!isset($seances)) {
-            return $this->redirectToRoute("accueil");
+            return $this->redirectToRoute("listingSeance");
         } else {
 
             return $this->render("seance/listingSeances.html.twig", ["seances" => $seances]);

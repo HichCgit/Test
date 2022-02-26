@@ -22,10 +22,10 @@ a{
 }
 .cardFilms{
     display: flex;
-    
     justify-content: space-evenly;
     font-family: fantasy;
     font-size: medium;  
+    flex-wrap: wrap;
    
     
 }

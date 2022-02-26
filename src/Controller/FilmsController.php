@@ -105,7 +105,7 @@ class FilmsController extends AbstractController
         $films =  $doctrine->getManager()->getRepository(Films::class)->findAll();
 
         if (!isset($films)) {
-            return $this->redirectToRoute("accueil");
+            return $this->redirectToRoute("listingFilms");
         } else {
 
             return $this->render("films/listingFilms.html.twig", ["films" => $films]);

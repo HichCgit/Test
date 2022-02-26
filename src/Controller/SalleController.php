@@ -53,7 +53,7 @@ class SalleController extends AbstractController
             $entityManager->flush();
 
 
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('sallelistingSalle');
         }
 
         $errors = $validator->validate($salle);
@@ -73,7 +73,7 @@ class SalleController extends AbstractController
         $salles =  $doctrine->getManager()->getRepository(Salle::class)->findAll();
 
         if (!isset($salles)) {
-            return $this->redirectToRoute("accueil");
+            return $this->redirectToRoute("sallelistingSalle");
         } else {
 
             return $this->render("salle/listingSalles.html.twig", ["salles" => $salles]);
