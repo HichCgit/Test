@@ -1,36 +1,78 @@
+body{
+    color: black;
+}
 
+.titre{
+ 
+    background-color: #a64b00;
+    border-radius: 4px;
+    width: 20%;
+    margin: 0 auto;
+   
+}
+.titre>h1{
+    color: #33CCCC	;
+    margin-top: 10px;
+    text-align: center;
+    font-family: cursive;
+}
+
+a{
+    color: black;
+}
 .cardFilms{
     display: flex;
-    background-color:rgb(146, 238, 181);
-    align-items: center;
-    justify-content: center;
-   
+    
+    justify-content: space-evenly;
     font-family: fantasy;
     font-size: medium;  
+   
     
+}
+.container{
+    padding: 16px;
+    width: 33%;
 }
 
 .cardFilm{
-    
-    margin: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 14px;
     border: solid black 1px;
-    margin-bottom: 10px;
-    width: 50%;
-    height: 60px;
-    
+    height: 210px;
+    background-color:#33CCCC	;
 }
 
+.Infofilm{
+    width: 80%;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between ;
+}
+.danger{
+    color: red;
+    background-color: rgba(255, 0, 0,0.2);
+    border-radius: 4px;
+}
+.primary{
+    color: rgb(0, 0, 0);
+    background-color: #0091ff;
+    border-radius: 4px;
+}
 .cardF{
     
-    margin: auto;
     border: solid black 1px;
     margin-bottom: 10px;
-    width: 50%;
+    width: 100px;
     height: 60px;
     
 }
-.ListeFilm{
-
-
-
+.btn{
+    padding: 6px 8px;
 }
+.btns{
+    width: 25%;
+  margin-right: 20px ;
+   
+} 

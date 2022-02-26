@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Salle;
 use App\Entity\Seance;
+use App\Form\SalleType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,11 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/salle", name="salle")
+ */
 class SalleController extends AbstractController
 {
-    /**
-     * @Route("/salle", name="salle")
-     */
+
     public function index(): Response
     {
         return $this->render('salle/index.html.twig', [
@@ -24,25 +27,25 @@ class SalleController extends AbstractController
     }
 
     /**
-     * @Route("/newseance", name="newSeance")
-     * @Route("/updateS/{id}", name="updateSeance")
+     * @Route("/newSalle", name="newSalle")
+     * @Route("/updateSalle/{id}", name="updateSalle")
      */
-    public function v2edit(Seance $salle = null, ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator)
+    public function v2edit(Salle $salle = null, ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator)
     {
         $entityManager = $doctrine->getManager();
 
         if (!$salle) {
-            $salle = new Seance;
+            $salle = new Salle;
         }
         $form = $this->createForm(SalleType::class, $salle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (!$salle->getId()) {
-                $salle->setStatus;
-            }
-            $salle->setUpdatedAt(new DateTime("now"));
+            // if (!$salle->getId()) {
+            //     $salle->setStatus(true);
+            // }
+            // $salle->setStatus());
             $salle = $form->getData();
 
 
@@ -64,7 +67,6 @@ class SalleController extends AbstractController
 
     /**
      * @Route("/listingSalle", name="listingSalle")
-     * @Route("/salleInfo/{id}" , name="salleInfo")
      */
     public function listing(ManagerRegistry $doctrine, $id = null): Response
     {
@@ -74,11 +76,7 @@ class SalleController extends AbstractController
             return $this->redirectToRoute("accueil");
         } else {
 
-            return $this->render("salle/listingSalle.html.twig", ["salles" => $salles]);
-        }
-        if (isset($id)) {
-            $salle = $doctrine->getManager()->getRepository(Salle::class)->find($id);
-            return $this->render("salle/salleInfo.html.twig", ["salle" => $salle]);
+            return $this->render("salle/listingSalles.html.twig", ["salles" => $salles]);
         }
     }
 

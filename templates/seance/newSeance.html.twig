@@ -17,7 +17,9 @@
 
 		{{form_row(form.dateDebut ,  {'label':'Date début :'}) }}
 		{{form_row(form.langue, {'label':'Langue :'} )}}
-		{{form_row(form.films,{'label':'Film : '})}}
+		{{form_row(form.Films, {'label':'Film  :'} )}}
+		{{form_row(form.Salle, {'label':'Salle :'} )}}
+
 		{% if (seance)%}
 			{{form_row(form.save , {'label':'Edit'})}}
 		{% else %}

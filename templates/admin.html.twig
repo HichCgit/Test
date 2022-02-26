@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}
+				Admin
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="/css/navbar.css">
+
+		{% endblock %}
+
+		{% block javascripts %}{% endblock %}
+	</head>
+	<div class="navbar">
+		<nav>
+			<a href="{{path('accueil')}}">Accueil</a>
+			<a href="{{path('createFilms')}}">Ajouter un film</a>
+			<a href="{{path('newSeance')}}">Ajouter une séance</a>
+			<a href="{{path('sallenewSalle')}}">Ajouter une salle</a>
+		</nav>
+	</div>
+
+	<body>
+
+		{% block body %}{% endblock %}
+	</body>
+</html>

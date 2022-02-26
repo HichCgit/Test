@@ -18,8 +18,8 @@ class SeanceType extends AbstractType
         $builder
             ->add('dateDebut')
             ->add('langue')
-            ->add('films', EntityType::class, ["class" => Films::class, "choice_label" => "Title"])
-            ->add('films', EntityType::class, ["class" => Salle::class, "choice_label" => "Numero"])
+            ->add('Films', EntityType::class, ["class" => Films::class, "choice_label" => "Title"])
+            ->add('Salle', EntityType::class, ["class" => Salle::class, "choice_label" => "Numero"])
             ->add('save', SubmitType::class, ['label' => 'Envoyer']);
     }
 

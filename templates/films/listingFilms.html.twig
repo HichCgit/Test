@@ -6,30 +6,61 @@
 
 {% block body %}
 	<link rel="stylesheet" href="\css\listeFilm.css">
-	<div>
+	<div class="conteneurAll">
 
-		<div>Voici la liste des Films disponibles :</div>
+		<div class="titre">
+			<h1>
+				Liste des films disponibles
+			</h1>
+		</div>
 
 		{% if films | length == 0 %}
 			pas de films disponibles
 
 		{% else %}
-			<ul>
-				<div class="cardFilms">
-					{% for film in films %}
+
+			<div class="cardFilms">
+				{% for film in films %}
+					<div class="container">
 						<div class="cardFilm">
-							<li class="ListeFilm">
-								<a href="{{path('filmInfo', {'id':film.id})}}">{{film.Title}}</a>
-								<a href="{{path('updateF', {'id':film.id} )}} ">Editer</a>
-								<a href="{{path('deleteF', {'id':film.id} )}} ">Supprimer</a>
-							</li>
+							<div class="Infofilm">
+								<h2>
+									<a href="{{path('filmInfo', {'id':film.id})}}">{{film.Title}}</a>
+								</h2>
+
+								<span>Durée :
+									{{film.temps}}
+									minutes</span>
+								<span>Genre :
+									{{film.genre}}</span>
+								<span>Prochaine séance :
+									{# {{film.Seances.dateDebut|date("d/m/Y")}}}}</span> #}
+									{% for seance in film.getSeances() %}
+
+										Le
+										{{  seance.getDateDebut()|date("d/m/Y") }}
+										à
+										{{seance.getDateDebut()|date('H:i')}}
+
+									{% endfor %}
+
+
+								</div>
+								<div class="btns">
+									<a href="{{path('updateF', {'id':film.id} )}} " class="btn primary">Editer</a>
+									<a href="{{path('deleteF', {'id':film.id} )}} " class="danger btn">Supprimer</a>
+								</div>
+
+							</div>
+
+
 						</div>
 					{% endfor %}
 				</div>
-			</ul>
-
-		{% endif %}
 
 
-	</div>
-{% endblock %}
+			{% endif %}
+
+
+		</div>
+	{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}Liste Salle
+{% endblock %}
+
+{% block body %}
+	<link rel="stylesheet" href="\css\listeFilm.css">
+
+	<div class="ConteneurAll">
+
+		<h1>Liste des salles disponible :</h1>
+
+		{% if salles | length == 0 %}
+			pas de salle disponible
+
+		{% else %}
+
+			<div class="cardFilms">
+				{% for salle in salles %}
+					<div class="cardFilm">
+
+
+						<span>Numéro°{{salle.Numero}}</span>
+
+					</br>
+					{% if salle.Status == 1 %}
+						<span>Disponible</span>
+					{% else %}
+						<span>Non Disponible</span>
+					{% endif %}
+
+					<a href="{{path('salleupdateSalle',{'id':salle.id} )}}">Editer</a>
+					<a href="{{path('salledeleteSalle',{'id':salle.id} )}}">Supprimer</a>
+
+
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+</div>{% endblock %}

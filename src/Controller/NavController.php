@@ -18,6 +18,18 @@ class NavController extends AbstractController
         return $this->render("navigation/accueil.html.twig");
     }
 
+
+    /**
+     * @Route("/admin", name="Admin")
+     */
+
+    public function Admin()
+    {
+
+        return $this->render("admin.html.twig");
+    }
+
+
     /**
      * @Route("/films", name="films")
      */
