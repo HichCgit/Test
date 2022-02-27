@@ -5,17 +5,26 @@
 {% endblock %}
 
 {% block body %}
-	<link rel="stylesheet" href="\css\listeFilm.css">
-	<div class="cardF">
+	<link rel="stylesheet" href="\css\infoFilm.css">
+	<div class="cardFilm">
+		<div class="titre">
+			<h2>{{film.Title}}</h2>
+		</div>
 
-		<h2>{{film.Title}}</h2>
-		<span>{{film.Synopsis}}</span>
-		<span>{{film.Genre}}</span>
+		<span>Description :
+			{{film.Synopsis}}</span>
+		<span>
+			Genre :
+			{{film.Genre}}</span>
 
 		<span>Realisateur :
 			{{film.Realisateur}}</span>
-		<span>{{film.temps}}</span>
-
-
+		<span>
+			Durée :
+			{{film.temps}}
+			minutes
+		</span>
 	</div>
-{% endblock %}
+
+
+</div>{% endblock %}

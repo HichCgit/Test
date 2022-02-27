@@ -4,29 +4,34 @@
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="\css\formFilm.css">
+	<div class="containerAll">
 
-	{% if (seance)%}
-		<h1>Formulaire Edition Seance</h1>
-	{% else %}
-		<h1>Formulaire Ajout Seance</h1>
-	{% endif %}
+		<div class="titre">
+			{% if (seance)%}
+				<h1>Formulaire Edition Seance</h1>
+			{% else %}
+				<h1>Formulaire Ajout Seance</h1>
+			{% endif %}
+		</div>
 
-	<div class="formF">
+		<div class="formSeance">
 
-		{{ form_start(form)}}
+			{{ form_start(form)}}
 
-		{{form_row(form.dateDebut ,  {'label':'Date début :'}) }}
-		{{form_row(form.langue, {'label':'Langue :'} )}}
-		{{form_row(form.Films, {'label':'Film  :'} )}}
-		{{form_row(form.Salle, {'label':'Salle :'} )}}
+			{{form_row(form.dateDebut ,  {'label':'Date début :'}) }}
+			{{form_row(form.langue, {'label':'Langue :'} )}}
+			{{form_row(form.Films, {'label':'Film  :'} )}}
+			{{form_row(form.Salle, {'label':'Salle :'} )}}
 
-		{% if (seance)%}
-			{{form_row(form.save , {'label':'Edit'})}}
-		{% else %}
-			{{form_row(form.save , {'label':'Save'})}}
-		{% endif %}
+			{% if (seance)%}
+				{{form_row(form.save , {'label':'Edit'})}}
+			{% else %}
+				{{form_row(form.save , {'label':'Save'})}}
+			{% endif %}
 
-		{{form_end(form)}}
+			{{form_end(form)}}
+		</div>
 	</div>
 
 

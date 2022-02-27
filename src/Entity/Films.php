@@ -23,7 +23,6 @@ class Films
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      * @Assert\Regex("/^[^0-9]+$/") 
      * message = "Champs non valide"
      */

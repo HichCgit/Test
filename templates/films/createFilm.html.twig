@@ -4,37 +4,43 @@
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="\css\formFilm.css">
+	<div class="containerAll">
 
-	{% if (isEditor)%}
-		<h1>Formulaire Edition film</h1>
-	{% else %}
-		<h1>Formulaire Ajout Film</h1>
-	{% endif %}
+		<div class="titre">
+			{% if (isEditor)%}
+				<h1>Formulaire Edition film</h1>
+			{% else %}
+				<h1>Formulaire Ajout Film</h1>
+			{% endif %}
+		</div>
 
-	<div class="formF">
+		<div class="formFilm">
 
-		{{ form_start(form)}}
+			{{ form_start(form)}}
 
-		{{form_row(form.Title ,  {'label':'Title :'}) }}
-		{{form_row(form.synopsis, {'label':'Synopsis :'} )}}
-		{{form_row(form.genre, {'label':'Genre :'} )}}
-		{{form_row(form.realisateur , {'label':'Realisateur  :'})}}
-		{{	form_row(form.temps , {'label':'Durée :'})}}
-		{{	form_row(form.status , {'label':'Status :'})}}
+			{{form_row(form.Title ,  {'label':'Title :'}) }}
+			{{form_row(form.synopsis, {'label':'Synopsis :'} )}}
+			{{form_row(form.genre, {'label':'Genre :'} )}}
+			{{form_row(form.realisateur , {'label':'Realisateur  :'})}}
+			{{	form_row(form.temps , {'label':'Durée :'})}}
+			{{	form_row(form.status , {'label':'Status :'})}}
 
 
-		{% if (isEditor)%}
-			{{form_row(form.save , {'label':'Edit'})}}
-		{% else %}
-			{{form_row(form.save , {'label':'Save'})}}
-		{% endif %}
+			{% if (isEditor)%}
+				{{form_row(form.save , {'label':'Edit'})}}
+			{% else %}
+				{{form_row(form.save , {'label':'Save'})}}
+			{% endif %}
 
-		{% for error in errors %}
+			{% for error in errors %}
 
-			<li>{{error.message}}</li>
+				<li>{{error.message}}</li>
 
-		{% endfor %}
-		{{form_end(form)}}
+			{% endfor %}
+			{{form_end(form)}}
+		</div>
+
 	</div>
 
 

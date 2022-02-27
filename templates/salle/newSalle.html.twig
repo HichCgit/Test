@@ -4,28 +4,31 @@
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="\css\formFilm.css">
+	<div class="containerAll">
 
-	{% if (salle)%}
-		<h1>Formulaire Edition Salle</h1>
-	{% else %}
-		<h1>Formulaire Ajout Salle</h1>
-	{% endif %}
+		<div class="titre">
+			{% if (salle)%}
+				<h1>Formulaire Edition Salle</h1>
+			{% else %}
+				<h1>Formulaire Ajout Salle</h1>
+			{% endif %}
+		</div>
+		<div class="formSalle">
 
-	<div class="formF">
+			{{ form_start(form)}}
 
-		{{ form_start(form)}}
+			{{form_row(form.Numero ,  {'label':'Numéro de Salle :'}) }}
+			{{form_row(form.Status, {'label':'Status : Disponible  '} )}}
 
-		{{form_row(form.Numero ,  {'label':'Numéro de Salle :'}) }}
-		{{form_row(form.Status, {'label':'Status : Disponible  '} )}}
+			{% if (salle)%}
+				{{form_row(form.save , {'label':'Edit'})}}
+			{% else %}
+				{{form_row(form.save , {'label':'Save'})}}
+			{% endif %}
 
-		{% if (salle)%}
-			{{form_row(form.save , {'label':'Edit'})}}
-		{% else %}
-			{{form_row(form.save , {'label':'Save'})}}
-		{% endif %}
-
-		{{form_end(form)}}
+			{{form_end(form)}}
+		</div>
 	</div>
-
 
 {% endblock %}
